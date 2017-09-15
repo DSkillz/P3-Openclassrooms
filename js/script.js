@@ -11,20 +11,29 @@ var diaporama = {
     },
     add: function (descriptions, urls) {
         if (descriptions.length != urls.length) {
-            alert('Vous avez mis soit une description, soit une photo');
+            alert('Le nombre de descriptions ne correspond pas au nombre de photos');
         }
 
-        var selectedTag = document.querySelector('main')
-        for (var i = 0; i <= descriptions.length; i++) {
+        var main = document.querySelector('main')
+        main.innerHTML = '';
+        for (var i = 0; i < descriptions.length; i++) {
             var tag1 = document.createElement('figure');
-            var tag2 = document.createElement('figcaption');
-            selectedTag.appendChild(tag1);
-            selectedTag.appendChild(tag2);
+            main.appendChild(tag1);
+        }
+        var figure = document.querySelectorAll('figure');
+        for (var i = 0; i < descriptions.length; i++) {
+            a = figure[i];
+            var tag2 = document.createElement('img');
+            a.appendChild(tag2);
+            var img = document.querySelectorAll('img');
+            img[i].setAttribute('src', urls[i]);
+            var tag3 = document.createElement('figcaption');
+            a.appendChild(tag3);
         }
         this.texte.push(descriptions);
-        this.photosUrl.push(urls)
+        this.photosUrl.push(urls);
     },
-    delete: function (indexDiapo) {
+delete: function (indexDiapo) {
 
     }
 };
