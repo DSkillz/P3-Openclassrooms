@@ -1,7 +1,6 @@
 var diaporama = {
     texte: [],
     photosUrl: [],
-    active: 1,
     init: true,
     addStartIndex: 0,
 
@@ -12,7 +11,7 @@ var diaporama = {
         
     },
     add: function (descriptions, urls) {
-        if (descriptions.length != urls.length) {
+        if (descriptions.length !== urls.length) {
             alert('Le nombre de descriptions ne correspond pas au nombre de photos');
         }
 
@@ -30,20 +29,20 @@ var diaporama = {
             figure[i].appendChild(img);
         }
 
-        if (this.init == true) {
+        if (this.init === true) {
             for (var i = 0; i < descriptions.length; i++) {
-                var figure = document.createElement('figure');
+                figure = document.createElement('figure');
                 main.appendChild(figure);
                 fillFigure();
             }
             this.init = false;
             this.addStartIndex += descriptions.length;
         } else {
-            for (var i = 0; i < descriptions.length; i++) {
+            for (i = 0; i < descriptions.length; i++) {
                 var figure = document.createElement('figure');
                 main.appendChild(figure);
             }
-            for (var i = this.addStartIndex; i < this.addStartIndex + descriptions.length; i++) {
+            for (i = this.addStartIndex; i < this.addStartIndex + descriptions.length; i++) {
                 console.log('addStartIndex = ' + this.addStartIndex);
                 console.log('i = ' + i);
                 fillFigure()
