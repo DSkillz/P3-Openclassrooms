@@ -25,8 +25,10 @@ var diaporama = {
             figure = document.getElementsByTagName('figure');
             var figcaption = document.createElement('figcaption');
             figure[i].appendChild(figcaption);
+            document.querySelectorAll('figcaption')[i].innerHTML = diaporama.texte[i];
             var img = document.createElement('img');
             figure[i].appendChild(img);
+            document.querySelectorAll('img')[i].setAttribute('src', diaporama.photosUrl[i]);
         }
 
         if (this.init === true) {
@@ -44,7 +46,6 @@ var diaporama = {
             }
             for (i = this.addStartIndex; i < this.addStartIndex + descriptions.length; i++) {
                 console.log('addStartIndex = ' + this.addStartIndex);
-                console.log('i = ' + i);
                 fillFigure()
             }
             this.addStartIndex += descriptions.length;
