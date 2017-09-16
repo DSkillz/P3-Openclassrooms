@@ -22,16 +22,19 @@ var diaporama = {
         console.log(this.photosUrl);
 
         var main = document.querySelector('main');
+        function fillFigure() {
+            figure = document.getElementsByTagName('figure');
+            var figcaption = document.createElement('figcaption');
+            figure[i].appendChild(figcaption);
+            var img = document.createElement('img');
+            figure[i].appendChild(img);
+        }
 
         if (this.init == true) {
             for (var i = 0; i < descriptions.length; i++) {
                 var figure = document.createElement('figure');
                 main.appendChild(figure);
-                figure = document.getElementsByTagName('figure');
-                var figcaption = document.createElement('figcaption');
-                figure[i].appendChild(figcaption);
-                var img = document.createElement('img');
-                figure[i].appendChild(img);
+                fillFigure();
             }
             this.init = false;
             this.addStartIndex += descriptions.length;
@@ -43,11 +46,7 @@ var diaporama = {
             for (var i = this.addStartIndex; i < this.addStartIndex + descriptions.length; i++) {
                 console.log('addStartIndex = ' + this.addStartIndex);
                 console.log('i = ' + i);
-                figure = document.getElementsByTagName('figure');
-                var figcaption = document.createElement('figcaption');
-                figure[i].appendChild(figcaption);
-                var img = document.createElement('img');
-                figure[i].appendChild(img);
+                fillFigure()
             }
             this.addStartIndex += descriptions.length;
         }
