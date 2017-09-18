@@ -1,3 +1,11 @@
+function displayAdminLogin(adminFunc) {
+
+
+    document.getElementsByClassName('diapoAdd').removeAttribute("onclick");
+    document.getElementsByClassName('diapoDel').removeAttribute("onclick");
+    window.location.href = "login.php?action=" + adminFunc;
+}
+
 var diaporama = {
     texte: [],
     photosUrl: [],
@@ -50,28 +58,6 @@ var diaporama = {
             }
             this.addStartIndex += descriptions.length;
         }
-
-        // jusqu'ici tout fonctionne
-
-/*        for (var i = this.texte.length; i < this.texte.length + descriptions.length; i++) {
-            console.log(i);
-        }*/
-
-/*        var figure = document.querySelectorAll('figure');
-        console.log('figure.length: ' + figure.length);
-        for (var i = this.texte.length; i < this.texte.length + descriptions.length; i++) {
-            console.log('i ()= ' +i);
-
-            g = figure[i];
-            console.log('figure[i]= ' +g);
-
-            var tag2 = document.createElement('img');
-            a.appendChild(tag2);
-            var img = document.querySelectorAll('img');
-            img[i].setAttribute('src', this.photosUrl[i]);
-            var tag3 = document.createElement('figcaption');
-            a.appendChild(tag3);
-        }*/
 
 /*        for (var i = 0; i < this.texte.length; i++) {
             document.getElementsByTagName('figcaption')[i].innerHTML = this.texte[i];
