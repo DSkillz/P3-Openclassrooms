@@ -1,11 +1,43 @@
 /* stylisation connexion admin*/
+body {
+    font-family: "Open Sans";
+}
 
-.login {
+#addButton, #delButton {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 30px;
     margin-top: -10px;
     background-color: #FFFFFF;
-    font-family: "Open Sans";
+}
+
+.hidden {
+    display: none;
+}
+
+#prompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 300px;
+    margin-top: -150px;
+    margin-left: -200px;
+    z-index: 100;
+}
+
+#firstInputUrl {
+    position: relative;
+    top: 4px;
+    margin-bottom: 10px;
+    width: 435px;
+    float: right;
+}
+
+.inputUrl {
+    position: relative;
+    float: right;
+    top: -8px;
+    width: 435px;
 }
