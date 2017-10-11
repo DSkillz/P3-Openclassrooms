@@ -31,13 +31,20 @@ body {
     position: relative;
     top: 4px;
     margin-bottom: 10px;
-    width: 435px;
+    width: 540px;
     float: right;
 }
 
 .inputUrl {
     position: relative;
     float: right;
-    top: -8px;
-    width: 435px;
+    top: -30px;
+    width: 540px;
+}
+
+#delDiapo {
+    width: 30px;
+    position: relative;
+    float: left;
+    top: -11px;
 }

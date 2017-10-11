@@ -12,10 +12,15 @@ function displayDialog() {
 
 function manageImg() {
     this.add = function () {
-        document.getElementById('dialogboxbody').innerHTML += '<input class="inputUrl" type="url" placeholder="Entrez l\'url de l\'image à ajouter"><br><br>';
+        document.getElementById('dialogboxbody').innerHTML += '<input class="inputUrl" type="url" placeholder="Entrez l\'url de l\'image à ajouter ou sélectionnez une image sur votre disque.">' +
+            '<form class="form1" runat="server">\n' +
+            '        <input type=\'file\' id="imgInp" />\n' +
+            '        <img id="blah" src="#" alt="your image" />\n' +
+            '    </form><br><br>';
         $('#dialogboxbody').addClass('dialogboxscroll');
-        action = 'add';
-        InpuBox.ok(action);
+    }
+    this.del = function () {
+
     }
 }
 
@@ -25,20 +30,16 @@ function CustomInputBox() {
     this.render = function () {
         displayDialog();
         document.getElementById('dialogboxhead').innerHTML = 'Veuillez ajouter les url des images à ajouter';
-        document.getElementById('dialogboxbody').innerHTML = '<img id="addDiapo" onclick="Manage.add();" src="https://icon-icons.com/icons2/930/PNG/512/square-add_icon-icons.com_72277.png" width="30px"/><input id="firstInputUrl" type="url" placeholder="Entrez l\'url de l\'image à ajouter"><br><br>';
-        document.getElementById('dialoboxbody').innerHTML += '<img id="delDiapo" onclick="Manage.del()"; src="https://icon-icons.com/icons2/930/PNG/512/square-minus_icon-icons.com_72274.png"/><br><br>';
+        document.getElementById('dialogboxbody').innerHTML = '<img id="addDiapo" onclick="Manage.add();" src="https://icon-icons.com/icons2/930/PNG/512/square-add_icon-icons.com_72277.png" width="30px"/><input id="firstInputUrl" class="inputUrl" type="url" placeholder="Entrez l\'url de l\'image à ajouter ou sélectionnez une image sur votre disque."><br><br>';
+        document.getElementById('dialogboxbody').innerHTML += '<img id="delDiapo" onclick="Manage.del()"; src="https://icon-icons.com/icons2/930/PNG/512/square-minus_icon-icons.com_72274.png"/><br>';
     }
     this.cancel = function () {
         document.getElementById('dialogbox').style.display = "none";
         document.getElementById('dialogoverlay').style.display = "none";
     }
-    this.ok = function (action) {
-        document.getElementById('dialogbox').style.display = "none";
-        document.getElementById('dialogoverlay').style.display = "none";
-    }
 }
 
-var InpuBox = new CustomInputBox();
+var InputBox = new CustomInputBox();
 
 function CustomAlert() {
     this.render = function (dialog) {
@@ -78,6 +79,8 @@ function CustomConfirm() {
 
 var Confirm = new CustomConfirm();
 
+
+//Custom Prompt (MDP et Images à ajouter / supprimer)
 function CustomPrompt() {
     this.render = function (dialog, func) {
         displayDialog();
@@ -93,7 +96,9 @@ function CustomPrompt() {
         document.getElementById('dialogoverlay').style.display = "none";
     }
     this.ok = function (func) {
-        var prompt_value1 = document.getElementById('prompt_value1').value;
+        if (document.getElementById('prompt_value1') != null) {
+            var prompt_value1 = document.getElementById('prompt_value1').value;
+        }
         window[func](prompt_value1);
         document.getElementById('dialogbox').style.display = "none";
         document.getElementById('dialogoverlay').style.display = "none";

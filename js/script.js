@@ -34,26 +34,61 @@ function doStuff(val){ /* fonction de récupération du mdp */
         datatype: 'text',
         success: function (response) {
             console.log(val, response.deobfuscate());
-            if (val == response.deobfuscate()) {
-                console.log('true');
-                InpuBox.render();
-            } else {
-                Alert.render('Mot de passe incorrect !');
+            if (typeof val === 'string') {
+                if (val === response.deobfuscate()) {
+                    console.log('true');
+                    InputBox.render();
+                } else {
+                    Alert.render('Mot de passe incorrect !');
+                }
+            } else if (Array.isArray(val)){
+
             }
         }
     });
 };
+
+class diaporama {
+    constructor(){
+        this.id = '';
+        this.texte = [];
+        this.photoUrl = [];
+        this.currentImg = 1;
+    }
+
+    init() {
+
+    }
+
+    previous() {
+
+    }
+
+    next() {
+
+    }
+
+    add(descriptions, urls) {
+
+    }
+}
+
+
 (function () { // fonction anonyme englobante
 
     descriptions = ['text1', 'text2', 'text3'];
     urls = ['url1', 'url2', 'url3'];
 
     diaporama = {
+        id: '',
         texte: [],
         photosUrl: [],
         arrayInit: true,
         addStartIndex: 0,
-
+        
+        init: function () {
+            
+        },
         previous: function () {
 
         },
@@ -89,6 +124,7 @@ function doStuff(val){ /* fonction de récupération du mdp */
                     main.appendChild(figure);
                     fillFigure();
                 }
+
                 this.arrayInit = false;
                 this.addStartIndex += descriptions.length;
             } else {
