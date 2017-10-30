@@ -70,7 +70,7 @@ function CustomConfirm() {
     }
     this.yes = function (op, id) {
         if (op == "delete_post") {
-            deletePost(id);
+            /*deletePost(id);*/
         }
         document.getElementById('dialogbox').style.display = "none";
         document.getElementById('dialogoverlay').style.display = "none";
