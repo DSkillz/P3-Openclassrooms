@@ -47,11 +47,11 @@ figcaption {
     height: 45px;
     font-size: 40px;
     background-color: Transparent;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
     overflow: hidden;
-    outline:none;
+    outline: none;
 }
 
 #prev {
@@ -69,6 +69,7 @@ figcaption {
 
 #bookInsert {
     flex: 1;
+    padding-top: 20px;
 }
 
 #bookState {
@@ -81,7 +82,7 @@ ul {
     padding-left: 15px;
 }
 
-#bookButton {
+#bookButton, #clearCanvas {
     display: flex;
     margin: 0 auto;
     background: #d1d1d1;
@@ -101,7 +102,7 @@ ul {
     border: none;
 }
 
-#bookButton:hover {
+#bookButton:hover, #clearCanvas:hover {
     background: #d4d4d4;
     background-image: -webkit-linear-gradient(top, #d4d4d4, #b5b5b5);
     background-image: -moz-linear-gradient(top, #d4d4d4, #b5b5b5);
@@ -111,7 +112,35 @@ ul {
     text-decoration: none;
 }
 
-@media screen and (max-width: 900px) and (orientation: portrait){
+#signature {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #c8c8c8;
+    z-index: 5;
+}
+
+#directive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 5px 0;
+    text-align: center;
+    font-weight: 900;
+    color: #bd2545;
+    background: #b5b5b5;
+    z-index: 5;
+}
+
+.hidden {
+    display: none!important;
+}
+
+@media screen and (max-width: 900px) and (orientation: portrait) {
     main {
         flex-direction: column;
         width: 100vw;
@@ -130,9 +159,18 @@ ul {
         width: 100vw;
     }
 
+    #signature {
+        top: 75px;
+        margin: 0 auto;
+    }
+
+    #bookInsert {
+        padding-top: 0;
+    }
+
 }
 
-@media screen and (max-width : 900px) and (orientation: landscape) {
+@media screen and (max-width: 900px) and (orientation: landscape) {
     #infos {
         width: 25%;
         font-size: 12px;

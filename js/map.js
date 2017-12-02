@@ -1,5 +1,5 @@
 'use strict';
-var station // on crée un objet station qu'on initialise en 'undefined'
+var station; // on crée un objet station qu'on initialise en 'undefined'
 var markers = [];
 function initMap() {
     var Paris = {lat: 48.8534, lng: 2.3488};
@@ -20,22 +20,31 @@ function initMap() {
                     $.getJSON('https://api.jcdecaux.com/vls/v1/stations/' + val.number + '?contract=Paris&apiKey=3c4b2118ed57c571940545ec0cdf4c5b7d8e0d3d')
                         .done(function (stationData) {
                             //afficher data dans encart
-                            console.log(stationData);
                             station = stationData; // on stocke stationData dans l'obj global 'station' qui sera utilisé plus tard dans l'obj booking lors de l'appel méthode reserve()
-                            document.getElementById('stationName').innerText = 'Station: ' + stationData.name;
-                            document.getElementById('address').innerText = stationData.address;
+                            document.getElementById('stationName').innerText = 'Station: ' + station.name;
+                            document.getElementById('address').innerText = station.address;
                             var text = '';
-                            if (stationData.status === 'OPEN') {
+                            if (station.status === 'OPEN') {
                                 text = 'Ouverte';
-                            } else if (stationData.status === 'CLOSED') {
+                                displayInfo()
+                                $('#bookButton').css('display', 'flex');
+                            } else if (station.status === 'CLOSED') {
                                 text = 'Fermée';
+                                displayInfo()
+                                $('#bookButton').css('display', 'none');
+                                alert('Station Fermée');
                             } else {
                                 text = 'En travaux';
+                                displayInfo()
+                                //$('#bookButton').css('display', 'none');
+                                alert('Station en Travaux');
                             }
-                            document.getElementById('status').innerText = text;
-                            document.getElementById('total').innerText = stationData.bike_stands;
-                            document.getElementById('availableStands').innerText = stationData.available_bike_stands;
-                            document.getElementById('availableBikes').innerText = stationData.available_bikes
+                            function displayInfo() {
+                                document.getElementById('status').innerText = text;
+                                document.getElementById('total').innerText = stationData.bike_stands;
+                                document.getElementById('availableStands').innerText = stationData.available_bike_stands;
+                                document.getElementById('availableBikes').innerText = stationData.available_bikes
+                            }
                         })
                 })
                 markers.push(marker);

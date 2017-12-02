@@ -35,10 +35,13 @@
                 <li>Places disponibles: <b id="availableStands"> - </b></li>
                 <li>Vélos disponibles: <b id="availableBikes"> - </b></li>
             </ul>
-            <button id="bookButton" onclick="Book.reserve()">Réserver</button>
+            <button id="clearCanvas" class="hidden">Effacer</button>
+            <button id="bookButton">Réserver</button>
         </div><!-- Insert = encart -->
+        <div id="directive" class="hidden">Veuillez signer svp puis cliquez à nouveau sur le bouton 'Réserver'.</div>
         <div id="bookState">Test</div>
     </section>
+    <canvas id="signature" class="hidden" width="350px" height="235px"></canvas>
 </main>
 <script
         src="https://code.jquery.com/jquery-2.2.4.min.js"
@@ -53,3 +56,17 @@
 </script>
 </body>
 </html>
+
+<!--<video autoplay loop poster="http://lespetitsdebrouillards-aura.org/wp-content/uploads/2017/10/ezgif.com-video-to-gif.png" id="bgvid">
+    <source src="http://lespetitsdebrouillards-aura.org/wp-content/uploads/2017/10/taupe-pour-animation_1.webm" type="video/webm">
+    <source src="http://lespetitsdebrouillards-aura.org/wp-content/uploads/2017/06/taupe-pour-animation_1.mp4" type="video/mp4">
+</video>
+
+
+video#bgvid {
+position: fixed; right: 0; bottom: 0;
+min-width: 100%; min-height: 100%;
+width: auto; height: auto; z-index: -100;
+background: url(http://lespetitsdebrouillards-aura.org/wp-content/uploads/2017/10/ezgif.com-video-to-gif.png) no-repeat;
+background-size: cover;
+}-->
