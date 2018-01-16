@@ -54,6 +54,7 @@
         crossorigin="anonymous"></script>
 <script src="js/diaporama.js"></script>
 <script src="js/book.js"></script>
+<script src="js/search.js"></script>
 <script src="js/markerclusterer.js"></script>
 <script src="js/map.js"></script>
 <script async defer
