@@ -1,23 +1,63 @@
 'use strict';
 var station; // on crée un objet station qu'on initialise en 'undefined'
 var markers = [];
+
 function initMap() {
-    var Paris = {lat: 48.8534, lng: 2.3488};
+    var Paris = {lat: 45.764043, lng: 4.835659};
 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: Paris
     });
 
-    $.getJSON('https://api.jcdecaux.com/vls/v1/stations?contract=Paris&apiKey=3c4b2118ed57c571940545ec0cdf4c5b7d8e0d3d')
+    //https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=MaCl%C3%A9API
+    $.getJSON('https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=3c4b2118ed57c571940545ec0cdf4c5b7d8e0d3d')
         .done(function (globalData) {
+            var openIcon = {
+                url: 'https://image.noelshack.com/fichiers/2018/03/2/1516109172-561282-svg.png', // url
+                scaledSize: new google.maps.Size(50, 50), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            };
+            var closedIcon = {
+                url: 'https://image.noelshack.com/fichiers/2018/03/2/1516109171-963-512-2.png', // url
+                scaledSize: new google.maps.Size(50, 50), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            };
+            var constrIcon = {
+                url: 'https://image.noelshack.com/fichiers/2018/03/2/1516109171-road-sign-us-mutcd-w21-1a-construction.png', // url
+                scaledSize: new google.maps.Size(50, 50), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            };
+
+            var as=$(globalData).filter(function (i,n){return n.website==='ebay';});
+            for (var i=0;i<as.length;i++)
+            {
+                alert(as[i].name +"         "+as[i].website)
+            }
+
             $.each(globalData, function (key, val) {
-                var marker = new google.maps.Marker({
-                    position: val.position
-                });
-                marker.addListener('click', function () {
+                if (val.status === 'OPEN') {
+                    var marker = new google.maps.Marker({
+                        position: val.position,
+                        icon: openIcon
+                    });
+                } else if (val.status === 'CLOSED') {
+                    var marker = new google.maps.Marker({
+                        position: val.position,
+                        icon: closedIcon
+                    });
+                } else {
+                    var marker = new google.maps.Marker({
+                        position: val.position,
+                        icon: constrIcon
+                    });
+                }
+                marker.addListener('mouseover', function () {
                     // récupère le JSON de la station et l'affiche
-                    $.getJSON('https://api.jcdecaux.com/vls/v1/stations/' + val.number + '?contract=Paris&apiKey=3c4b2118ed57c571940545ec0cdf4c5b7d8e0d3d')
+                    $.getJSON('https://api.jcdecaux.com/vls/v1/stations/' + val.number + '?contract=Lyon&apiKey=3c4b2118ed57c571940545ec0cdf4c5b7d8e0d3d')
                         .done(function (stationData) {
                             //afficher data dans encart
                             station = stationData; // on stocke stationData dans l'obj global 'station' qui sera utilisé plus tard dans l'obj booking lors de l'appel méthode reserve()
@@ -28,6 +68,8 @@ function initMap() {
                                 text = 'Ouverte';
                                 displayInfo()
                                 $('#bookButton').css('display', 'flex');
+                                marker.icon =
+                                    console.log(marker);
                             } else if (station.status === 'CLOSED') {
                                 text = 'Fermée';
                                 displayInfo()
@@ -39,6 +81,7 @@ function initMap() {
                                 //$('#bookButton').css('display', 'none');
                                 alert('Station en Travaux');
                             }
+
                             function displayInfo() {
                                 document.getElementById('status').innerText = text;
                                 document.getElementById('total').innerText = stationData.bike_stands;
@@ -46,7 +89,7 @@ function initMap() {
                                 document.getElementById('availableBikes').innerText = stationData.available_bikes
                             }
                         })
-                })
+                });
                 markers.push(marker);
             });
 

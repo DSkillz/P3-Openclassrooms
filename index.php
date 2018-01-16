@@ -35,8 +35,13 @@
                 <li>Places disponibles: <b id="availableStands"> - </b></li>
                 <li>Vélos disponibles: <b id="availableBikes"> - </b></li>
             </ul>
-            <button id="clearCanvas" class="hidden">Effacer</button>
-            <button id="bookButton">Réserver</button>
+            <div id="outerButtons">
+                <div class="innerButtons"><button id="clearCanvas" class="hidden">Effacer</button></div>
+                <div class="innerButtons"><button id="bookButton">Réserver</button></div>
+            </div>
+            <input type="text" oninput="view()" placeholder="ara" id="ara">
+            <br>
+            <div id="alan"></div>
         </div><!-- Insert = encart -->
         <div id="directive" class="hidden">Veuillez signer svp puis cliquez à nouveau sur le bouton 'Réserver'.</div>
         <div id="bookState">Test</div>

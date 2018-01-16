@@ -82,9 +82,17 @@ ul {
     padding-left: 15px;
 }
 
+#outerButtons
+{
+    width:100%;
+    text-align: center;
+}
+.innerButtons
+{
+    display: inline-block;
+}
+
 #bookButton, #clearCanvas {
-    display: flex;
-    margin: 0 auto;
     background: #d1d1d1;
     background-image: -webkit-linear-gradient(top, #d1d1d1, #858585);
     background-image: -moz-linear-gradient(top, #d1d1d1, #858585);

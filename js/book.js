@@ -1,8 +1,11 @@
 'use strict';
+var canvas = $('#signature');
+var baseCanvas = $('#signature')[0].toDataURL();
 class booking {
     constructor(timeOut) {
         this.stationToBook;
         this.timeOut = timeOut;
+        this.bookConfirm = true;
     }
 
     sign() {
@@ -12,8 +15,6 @@ class booking {
             alert('Sélectionnez d\'abord une station pour pouvoir réserver');
         } else {
             console.log(this.stationToBook.name);
-            //bookElmt.removeEventListener('click', Book.sign(), false); // on ne redéclenche pas la méthode de signature au click sur bouton réserver
-            //bookElmt.addEventListener('click', Book.reserve(), false);
             /// On fixe l'affichage sur mobile
             const mq = window.matchMedia('(max-width: 900px)');
             if (mq.matches) {
@@ -30,10 +31,13 @@ class booking {
             var painting = false;
             var started = false;
             var width_brush = 2;
-            var canvas = $('#signature');
             var cursorX, cursorY;
 
             var context = canvas[0].getContext('2d');
+
+            // canvas.toDataURL() == blank.toDataURL();
+
+            if (this.bookConfirm == true) {clear_canvas()}; // efface le canvas si ce n'est fait (réinitialise après sauvegarde de la réserversation, save() method)
 
             // Trait arrondi :
             context.lineJoin = 'round';
@@ -90,35 +94,53 @@ class booking {
             // Clear du Canvas :
             function clear_canvas() {
                 context.clearRect(0, 0, canvas.width(), canvas.height());
+                console.log('cleared !');
             }
+            document.getElementById('clearCanvas').addEventListener('click', clear_canvas);
         }
-        bookElmt.removeEventListener('click', sign);
 
-        bookElmt.addEventListener('click', reserve);
+        bookButtonElmt.removeEventListener('click', sign);
+        bookButtonElmt.addEventListener('click', reserve);
     }
 
     reserve() {
         console.log('reserve');
-        if (confirm('Validez-vous votre signature ?')) {
-            $('#signature, #directive, #clearCanvas').addClass('hidden');
-            /// On réactive le scroll
-            const mq = window.matchMedia('(max-width: 900px)');
-            if (mq.matches) {
-                //less than 900px
-                $('html, body').css('overflow', 'auto');
-                $('body').css('position', 'static');
-            }
-            this.save();
-            bookElmt.removeEventListener('click', reserve);
-            bookElmt.addEventListener('click', sign);
+        this.canvasSignature = canvas[0].toDataURL(); // sauvegarde temporairement la signature
+        if (baseCanvas == this.canvasSignature) {
+            alert('Vous n\'avez pas signé !');
         } else {
-            this.sign();
+            this.bookConfirm = confirm('Validez-vous votre signature ?');
+            if (this.bookConfirm) { // Si oui, on sauvegarde et on initialise le timer
+                $('#signature, #directive, #clearCanvas').addClass('hidden');
+                /// On réactive le scroll sur mobile
+                const mq = window.matchMedia('(max-width: 900px)');
+                if (mq.matches) {
+                    //less than 900px
+                    $('html, body').css('overflow', 'auto');
+                    $('body').css('position', 'static');
+                }
+                this.save();
+                bookButtonElmt.removeEventListener('click', reserve);
+                bookButtonElmt.addEventListener('click', sign);
+            } else { // Si non, on recommence sans effacer le canvas
+                this.sign();
+            }
         }
-
     }
 
     save() {
-        console.log('enregistrement de la réservation...')
+        // https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
+        // store Object in WebStorage by stringify it
+        sessionStorage.setItem('bookedStation', JSON.stringify(this.stationToBook));
+        var retrievedbookedStation = sessionStorage.getItem('bookedStation');
+        // https://stackoverflow.com/questions/20603222/saving-image-in-canvas-to-local-storage
+        // save canvas image data to sessionStorage
+        sessionStorage.setItem('signature', this.canvasSignature);
+        console.log('enregistrement de la réservation...');
+    }
+
+    seeBook() {
+
     }
 
     delBook() {
@@ -126,11 +148,13 @@ class booking {
 }
 
 const Book = new booking('', 2000);
-var bookElmt = document.getElementById('bookButton');
-bookElmt.addEventListener('click', sign);
+var bookButtonElmt = document.getElementById('bookButton');
+bookButtonElmt.addEventListener('click', sign);
+
 function sign() {
     Book.sign();
 }
+
 function reserve() {
     Book.reserve();
 }
