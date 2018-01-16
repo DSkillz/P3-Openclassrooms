@@ -1,5 +1,6 @@
 'use strict';
 var station; // on crée un objet station qu'on initialise en 'undefined'
+var stationJsonObj;
 var markers = [];
 
 function initMap() {
@@ -13,6 +14,7 @@ function initMap() {
     //https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=MaCl%C3%A9API
     $.getJSON('https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=3c4b2118ed57c571940545ec0cdf4c5b7d8e0d3d')
         .done(function (globalData) {
+            // déclaration des icônes ope, closed ou constr et définition size
             var openIcon = {
                 url: 'https://image.noelshack.com/fichiers/2018/03/2/1516109172-561282-svg.png', // url
                 scaledSize: new google.maps.Size(50, 50), // scaled size
@@ -32,13 +34,8 @@ function initMap() {
                 anchor: new google.maps.Point(0, 0) // anchor
             };
 
-            var as=$(globalData).filter(function (i,n){return n.website==='ebay';});
-            for (var i=0;i<as.length;i++)
-            {
-                alert(as[i].name +"         "+as[i].website)
-            }
-
             $.each(globalData, function (key, val) {
+                // affichage des markers custom suivant statut
                 if (val.status === 'OPEN') {
                     var marker = new google.maps.Marker({
                         position: val.position,

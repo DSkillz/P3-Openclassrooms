@@ -39,9 +39,11 @@
                 <div class="innerButtons"><button id="clearCanvas" class="hidden">Effacer</button></div>
                 <div class="innerButtons"><button id="bookButton">Réserver</button></div>
             </div>
-            <input type="text" oninput="view()" placeholder="ara" id="ara">
-            <br>
-            <div id="alan"></div>
+            <div id="search">
+                <input type="text" oninput="view()" placeholder="Station ou adresse" id="filter"><button id="send">Ok</button>
+                <br>
+                <div id="output"></div>
+            </div>
         </div><!-- Insert = encart -->
         <div id="directive" class="hidden">Veuillez signer svp puis cliquez à nouveau sur le bouton 'Réserver'.</div>
         <div id="bookState">Test</div>

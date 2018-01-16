@@ -1,24 +1,32 @@
 var obj = [
-    {"id": 1, "ad": "aslan", "yas": "22"},
-    {"id": 2, "ad": "mehmet", "yas": "55"},
-    {"id": 3, "ad": "dobra", "yas": "56"},
-    {"id": 4, "ad": "sevgi", "yas": "35"}
+    {"id": 1, "name": "aslan", "age": "22"},
+    {"id": 2, "name": "mehmet", "age": "55"},
+    {"id": 3, "name": "dobra", "age": "56"},
+    {"id": 4, "name": "sevgi", "age": "35"}
 ];
 
-var alan = document.querySelector("#alan");
+var output = document.querySelector("#output");
 
 view = ()=>{
+
+    myvalue = document.querySelector("#filter").value;
+
     newobj = obj.filter(function(a) {
-        return a.ad == "aslan";
+        return a.name.indexOf(myvalue) != -1 || a.age.indexOf(myvalue) != -1;
     });
 
-    var icerik = "";
+    var templateStr = "";
 
     newobj.forEach(function(b, index) {
-        icerik += `<div class='mavi'>ad: ${b.ad} yas: ${b.yas}`; // template string ES6
+        templateStr += `<div class='mavi'>ad: ${b.name} yas: ${b.age}`; // template string ES6
     });
 
-    alan.innerHTML = icerik;
+    output.innerHTML = templateStr;
+
+    if (newobj.length == 0) {
+        output.innerHTML = `<div class='pink'>Not found</div>`
+    }
+
 };
 
 view();
