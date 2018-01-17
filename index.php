@@ -39,11 +39,11 @@
                 <div class="innerButtons"><button id="clearCanvas" class="hidden">Effacer</button></div>
                 <div class="innerButtons"><button id="bookButton">Réserver</button></div>
             </div>
-            <div id="search">
+            <!--<div id="search">
                 <input type="text" oninput="view()" placeholder="Station ou adresse" id="filter"><button id="send">Ok</button>
                 <br>
                 <div id="output"></div>
-            </div>
+            </div>-->
         </div><!-- Insert = encart -->
         <div id="directive" class="hidden">Veuillez signer svp puis cliquez à nouveau sur le bouton 'Réserver'.</div>
         <div id="bookState">Test</div>
@@ -56,12 +56,12 @@
         crossorigin="anonymous"></script>
 <script src="js/diaporama.js"></script>
 <script src="js/book.js"></script>
-<script src="js/search.js"></script>
 <script src="js/markerclusterer.js"></script>
 <script src="js/map.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnGoKkhN_gZtFsOa_Z8FRq35Tab9bIm3g&callback=initMap">
 </script>
+<script src="js/search.js"></script>
 </body>
 </html>
 

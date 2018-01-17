@@ -1,6 +1,7 @@
 'use strict';
 var station; // on crée un objet station qu'on initialise en 'undefined'
-var stationJsonObj;
+var globalJson;
+var global;
 var markers = [];
 
 function initMap() {
@@ -14,7 +15,9 @@ function initMap() {
     //https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=MaCl%C3%A9API
     $.getJSON('https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=3c4b2118ed57c571940545ec0cdf4c5b7d8e0d3d')
         .done(function (globalData) {
-            // déclaration des icônes ope, closed ou constr et définition size
+            globalJson = JSON.stringify(globalData);
+            //console.log(globalJson);
+            // déclaration des icônes open, closed ou constr et définition size
             var openIcon = {
                 url: 'https://image.noelshack.com/fichiers/2018/03/2/1516109172-561282-svg.png', // url
                 scaledSize: new google.maps.Size(50, 50), // scaled size
@@ -52,7 +55,7 @@ function initMap() {
                         icon: constrIcon
                     });
                 }
-                marker.addListener('mouseover', function () {
+                marker.addListener('click', function () {
                     // récupère le JSON de la station et l'affiche
                     $.getJSON('https://api.jcdecaux.com/vls/v1/stations/' + val.number + '?contract=Lyon&apiKey=3c4b2118ed57c571940545ec0cdf4c5b7d8e0d3d')
                         .done(function (stationData) {
@@ -99,5 +102,4 @@ function initMap() {
             var err = textStatus + ", " + error;
             console.log("Request Failed: " + err);
         });
-
 };
