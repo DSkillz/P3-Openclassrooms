@@ -132,11 +132,14 @@ class booking {
         // https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
         // store Object in WebStorage by stringify it
         sessionStorage.setItem('bookedStation', JSON.stringify(this.stationToBook));
-        var retrievedbookedStation = sessionStorage.getItem('bookedStation');
+        sessionStorage.setItem("bookDate", Date.now());
+        sessionStorage.setItem('signature', this.canvasSignature);
+        myTimer.init(this.timeOut);
         // https://stackoverflow.com/questions/20603222/saving-image-in-canvas-to-local-storage
         // save canvas image data to sessionStorage
-        sessionStorage.setItem('signature', this.canvasSignature);
+        var retrievedbookedStation = JSON.parse(sessionStorage.getItem('bookedStation'));
         console.log('enregistrement de la réservation...');
+        console.log(retrievedbookedStation);
     }
 
     seeBook() {
@@ -148,7 +151,7 @@ class booking {
 }
 
 const Book = new booking('', 2000);
-var bookButtonElmt = document.getElementById('bookButton');
+var bookButtonElmt = document.getElementById('bookValidate');
 bookButtonElmt.addEventListener('click', sign);
 
 function sign() {

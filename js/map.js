@@ -4,12 +4,13 @@ var globalJson;
 var global;
 var markers = [];
 
+
 function initMap() {
-    var Paris = {lat: 45.764043, lng: 4.835659};
+    var Lyon = {lat: 45.764043, lng: 4.835659};
 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
-        center: Paris
+        center: Lyon
     });
 
     //https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=MaCl%C3%A9API

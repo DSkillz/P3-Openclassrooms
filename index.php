@@ -64,17 +64,3 @@
 <script src="js/search.js"></script>
 </body>
 </html>
-
-<!--<video autoplay loop poster="http://lespetitsdebrouillards-aura.org/wp-content/uploads/2017/10/ezgif.com-video-to-gif.png" id="bgvid">
-    <source src="http://lespetitsdebrouillards-aura.org/wp-content/uploads/2017/10/taupe-pour-animation_1.webm" type="video/webm">
-    <source src="http://lespetitsdebrouillards-aura.org/wp-content/uploads/2017/06/taupe-pour-animation_1.mp4" type="video/mp4">
-</video>
-
-
-video#bgvid {
-position: fixed; right: 0; bottom: 0;
-min-width: 100%; min-height: 100%;
-width: auto; height: auto; z-index: -100;
-background: url(http://lespetitsdebrouillards-aura.org/wp-content/uploads/2017/10/ezgif.com-video-to-gif.png) no-repeat;
-background-size: cover;
-}-->

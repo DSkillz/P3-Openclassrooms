@@ -92,7 +92,7 @@ ul {
     display: inline-block;
 }
 
-#bookButton, #clearCanvas {
+#bookValidate, #clearCanvas {
     background: #d1d1d1;
     background-image: -webkit-linear-gradient(top, #d1d1d1, #858585);
     background-image: -moz-linear-gradient(top, #d1d1d1, #858585);
@@ -110,7 +110,7 @@ ul {
     border: none;
 }
 
-#bookButton:hover, #clearCanvas:hover {
+#bookValidate:hover, #clearCanvas:hover {
     background: #d4d4d4;
     background-image: -webkit-linear-gradient(top, #d4d4d4, #b5b5b5);
     background-image: -moz-linear-gradient(top, #d4d4d4, #b5b5b5);
